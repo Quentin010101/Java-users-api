@@ -26,4 +26,15 @@ public class ApiUser {
 
     public ApiUser() {
     }
+
+    @Override
+    public String toString() {
+        return "ApiUser{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", date_of_birth=" + date_of_birth +
+                '}';
+    }
 }

@@ -15,6 +15,8 @@ public interface ApiUserRepository extends JpaRepository<ApiUser, Long> {
 
     boolean existsById(Long id);
 
+    List<ApiUser> findByName(String name);
+
     @Query(value="SELECT u FROM ApiUser u ORDER BY rand()")
     List<ApiUser> findRandomUsers();
 

@@ -12,6 +12,7 @@ import com.example.javausersapi.repository.RoleRepository;
 import com.example.javausersapi.repository.UserRepository;
 import com.example.javausersapi.service.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -115,8 +117,12 @@ public class AuthController {
         }
 
         user.setRoles(roles);
+
+        // genere la clef api
+        UUID apiKey = UUID.randomUUID();
+        user.setApikey(String.valueOf(apiKey));
         userRepository.save(user);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return new ResponseEntity(new MessageResponse("User registered successfully!"), HttpStatus.OK);
     }
 }

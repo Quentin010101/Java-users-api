@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,6 +28,9 @@ public class User {
     private String password;
 
     private String apikey;
+
+    @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
+    private List<Request> requests;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "user_roles",

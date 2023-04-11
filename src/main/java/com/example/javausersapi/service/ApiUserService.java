@@ -24,6 +24,11 @@ public class ApiUserService {
         return null;
     }
 
+    public List<ApiUser> findByName(String name){
+        List<ApiUser> users = repository.findByName(name);
+        return users;
+    }
+
     public List<ApiUser> getRandomUsers(Long number){
         if(number == null){
             throw new IllegalArgumentException("Value must be a long");

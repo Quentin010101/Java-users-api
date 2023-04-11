@@ -25,11 +25,6 @@ public class ApiUserController {
     // api/user/{id}/information
     @GetMapping("/{id}/information")
     public ResponseEntity<ApiUser> getUserInformation(@PathVariable Long id, @RequestParam(required = false) String apikey){
-        try {
-            this.checkApiKey(apikey);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
-        }
 
         return new ResponseEntity<>(apiUserService.getUserInformation(id), HttpStatus.OK);
     }
@@ -37,11 +32,6 @@ public class ApiUserController {
     // api/user/random?number=
     @GetMapping("/random")
     public ResponseEntity<List<ApiUser>> getRandomUserInformation(@RequestParam(required = false) Long number, @RequestParam(required = false) String apikey){
-        try {
-            this.checkApiKey(apikey);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
-        }
 
         if(number == null){
             number = (long) 1;
@@ -50,10 +40,11 @@ public class ApiUserController {
 
     }
 
-    private void checkApiKey(String apiKey) throws Exception {
-        System.out.println(apiKey);
-        if(!userDetailsService.apiKeyExists(apiKey) || apiKey == null){
-            throw new IOException("Wrong api key");
-        }
+    // api/user/findByName?name=
+    @GetMapping("/findByName")
+    public ResponseEntity<List<ApiUser>> findByName(@RequestParam(required = true) String name, @RequestParam(required = false) String apikey){
+
+        return new ResponseEntity<>(apiUserService.findByName(name), HttpStatus.OK);
     }
+
 }
