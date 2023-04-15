@@ -18,6 +18,7 @@ public class Request {
     private Long user_id;
     private Date date;
 
+
     public Request() {
     }
 }

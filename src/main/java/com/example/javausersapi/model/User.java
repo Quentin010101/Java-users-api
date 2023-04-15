@@ -29,7 +29,7 @@ public class User {
 
     private String apikey;
 
-    @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Request> requests;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -40,6 +40,7 @@ public class User {
 
     public User() {
     }
+
 
     public User(String username, String email, String password) {
         this.username = username;
